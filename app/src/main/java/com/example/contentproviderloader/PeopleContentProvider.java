@@ -15,7 +15,7 @@ public class PeopleContentProvider extends ContentProvider {
     public static final String AUTHRITY = "com.dream.center.provider";
     private static final int PEOPLE_TABLE_CODE = 0;
 
-    private static final Uri NOTIFY_URI = Uri.parse("content://" + AUTHRITY);
+    private static final Uri NOTIFY_URI = Uri.parse("content://" + AUTHRITY + "/notifyList");
     private Uri notifuuri;
 
     private Context context;
@@ -51,7 +51,7 @@ public class PeopleContentProvider extends ContentProvider {
                         sortOrder,
                         null);
                 notifuuri = uri;
-                cursor.setNotificationUri(context.getContentResolver(),uri);
+                cursor.setNotificationUri(context.getContentResolver(),NOTIFY_URI);
                 break;
             default:
                 throw new IllegalArgumentException("uri = " + uri);
@@ -81,7 +81,7 @@ public class PeopleContentProvider extends ContentProvider {
             Log.e("xxx", "insert: to notify");
 
             Uri newUri = ContentUris.withAppendedId(uri, row);
-            context.getContentResolver().notifyChange(uri,null);
+            context.getContentResolver().notifyChange(NOTIFY_URI,null);
             return newUri;
         }
         return null;
