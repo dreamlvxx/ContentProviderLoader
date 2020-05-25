@@ -78,8 +78,6 @@ public class PeopleContentProvider extends ContentProvider {
         }
 
         if(row > -1) {
-            Log.e("xxx", "insert: to notify");
-
             Uri newUri = ContentUris.withAppendedId(uri, row);
             context.getContentResolver().notifyChange(NOTIFY_URI,null);
             return newUri;

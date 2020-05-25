@@ -27,13 +27,11 @@ public class PeopleLoader extends AsyncTaskLoader<Cursor> {
         Cursor cursor = getContext().getContentResolver().query(STUDENT_URI,null,null,null);
         //这句话必须加，才能与provider里面的notifyChange结合使用，得到内容通知，重新加载。
         cursor.registerContentObserver(mObserver);
-        Log.e("xxx", "loadInBackground: execute count = " + cursor.getCount());
         return cursor;
     }
 
     @Override
     protected void onStartLoading() {
-        Log.e("xxx", "onStartLoading: ");
         forceLoad();
     }
 
